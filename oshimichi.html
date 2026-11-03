@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7edf2">
+<title>推し道｜오시미치</title>
+<style>
+:root{--pink:#ffc0cb;--pink2:#ffe5ea;--ink:#302832;--muted:#817680;--paper:#fffafd;--line:#eee9f7;--purple:#9b82b7;--green:#6b9b80;--lavender:#e6e6fa}
+*{box-sizing:border-box}body{margin:0;background:#f8f5f7;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",sans-serif}
+button,input{font:inherit}button{cursor:pointer;border:0}
+.app{max-width:1100px;margin:auto;min-height:100vh;background:var(--paper);box-shadow:0 0 35px #3b21300b}
+header{padding:22px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fffafdE8;backdrop-filter:blur(12px);z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:23px;letter-spacing:.04em}.logo{width:39px;height:39px;border-radius:14px;background:linear-gradient(135deg,#ffc0cb,#e6e6fa);display:grid;place-items:center;color:white;font-size:20px}
+.brand small{display:block;font-size:10px;color:var(--muted);letter-spacing:.15em;font-weight:600}
+nav{display:flex;gap:7px;flex-wrap:wrap}nav button{background:transparent;color:var(--muted);padding:10px 13px;border-radius:20px;font-size:13px}nav button.active,nav button:hover{background:var(--pink2);color:#9d5878}
+main{padding:32px 5% 80px}.page{display:none}.page.active{display:block}
+.hero{border-radius:28px;padding:42px 7%;background:linear-gradient(120deg,#ffc0cb,#e6e6fa);position:relative;overflow:hidden;min-height:260px;display:flex;align-items:center}
+.hero:after{content:"✦";position:absolute;right:8%;top:16px;font-size:150px;color:#fff8;transform:rotate(15deg)}
+.eyebrow{font-size:11px;letter-spacing:.2em;color:#a66d88;font-weight:800}.hero h1{font-size:clamp(29px,5vw,48px);line-height:1.25;margin:12px 0}.hero p{color:#766b75;line-height:1.9;margin:0 0 20px;max-width:530px}
+.primary{background:#b96f91;color:white;padding:12px 20px;border-radius:24px;font-weight:700;box-shadow:0 6px 15px #b96f912b}.secondary{background:white;color:#a45e80;border:1px solid #edcfdd;padding:11px 17px;border-radius:22px;font-weight:700}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:34px 0 16px}.section-head h2{font-size:21px;margin:0}.section-head p{font-size:12px;color:var(--muted);margin:5px 0 0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:white;border:1px solid var(--line);border-radius:19px;overflow:hidden;box-shadow:0 5px 18px #39243408}
+.card-art{height:125px;background:linear-gradient(135deg,#ffc0cb,#e6e6fa);display:grid;place-items:center;font-size:40px}.card-body{padding:16px}.card h3{font-size:16px;margin:0 0 7px}.muted{color:var(--muted);font-size:12px;line-height:1.7}.tag{display:inline-block;background:#f8edf2;color:#a35d7d;border-radius:20px;padding:5px 9px;font-size:10px;margin:3px 3px 0 0}.status{font-size:11px;color:var(--green);font-weight:800}.status.closed{color:#b56d6d}.actions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.small-btn{padding:8px 12px;border-radius:18px;background:#ffe5ea;color:#9d5878;font-size:12px;font-weight:700}.small-btn.saved{background:#b96f91;color:white}
+.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:22px;margin:18px 0}.panel h2,.panel h3{margin-top:0}
+.group-row{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.choice{padding:13px 20px;border:1px solid var(--line);border-radius:15px;background:white;color:var(--ink);font-weight:700}.choice.selected{background:var(--pink2);border-color:#dfa4bd;color:#9d5878}
+.member-row{display:flex;gap:8px;flex-wrap:wrap}.member{border-radius:20px;background:#e6e6fa;padding:9px 14px;color:#756975;font-size:13px}.member.selected{background:#9b82b7;color:white}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.toolbar input,.toolbar select{padding:11px 14px;border:1px solid var(--line);border-radius:13px;background:white;color:var(--ink)}
+.spot-list{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.spot-card{display:grid;grid-template-columns:105px 1fr;background:white;border:1px solid var(--line);border-radius:17px;overflow:hidden}.spot-card .card-art{height:100%;min-height:155px;font-size:32px}.spot-info{padding:14px}.spot-info h3{font-size:15px;margin:0 0 5px}
+.map-mock{height:250px;border-radius:18px;background-color:#f0edf0;background-image:linear-gradient(35deg,transparent 47%,#fff 48%,#fff 51%,transparent 52%),linear-gradient(120deg,transparent 47%,#fff 48%,#fff 51%,transparent 52%);background-size:95px 85px;display:grid;place-items:center;color:#8a7e89;text-align:center;padding:20px}
+.route-item{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.number{width:30px;height:30px;border-radius:50%;background:#e6e6fa;color:#765b9b;display:grid;place-items:center;font-weight:800;flex-shrink:0}
+.empty{text-align:center;padding:45px 15px;color:var(--muted)}footer{text-align:center;padding:24px;color:#a99da6;font-size:11px;border-top:1px solid var(--line)}
+.note{background:#fff7e9;color:#92764d;border-radius:13px;padding:12px 15px;font-size:12px;line-height:1.7;margin:15px 0}
+@media(max-width:700px){header{align-items:flex-start;gap:10px;flex-direction:column;padding:15px 5%}nav{width:100%;overflow-x:auto;flex-wrap:nowrap}nav button{white-space:nowrap;padding:9px 11px}main{padding-top:22px}.cards{grid-template-columns:1fr}.spot-list{grid-template-columns:1fr}.hero{padding:30px 7%;min-height:280px}.hero:after{right:0;top:8px;font-size:100px}.section-head{align-items:start;flex-direction:column;gap:5px}.panel{padding:17px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><div class="logo">✦</div><div>推し道 <small>오시미치 · YOUR K-POP PILGRIMAGE</small></div></div>
+  <nav>
+    <button class="active" data-page="home">ホーム</button>
+    <button data-page="select">推しを選ぶ</button>
+    <button data-page="spots">聖地を探す</button>
+    <button data-page="favorites">お気に入り <span id="favCount">0</span></button>
+    <button data-page="course">今日のコース</button>
+  </nav>
+</header>
+<main>
+<section id="home" class="page active">
+  <div class="hero"><div><div class="eyebrow">FIND YOUR FAVORITE PLACE</div><h1>推しに会いに行く道を、<br>もっと簡単に。</h1><p>好きなアーティストの聖地を見つけて、保存して、今日の巡礼コースを作ろう。韓国旅行をもっと楽しく。</p><button class="primary" onclick="showPage('select')">推しを選んで始める →</button></div></div>
+  <div class="section-head"><div><h2>推し道でできること</h2><p>聖地探しから巡礼コース作成まで、ひとつの場所で。</p></div></div>
+  <div class="cards">
+    <article class="card"><div class="card-art">♡</div><div class="card-body"><h3>推しから探す</h3><p class="muted">グループやメンバーを選んで、関連する聖地をチェック。</p></div></article>
+    <article class="card"><div class="card-art">⌖</div><div class="card-body"><h3>情報を確認する</h3><p class="muted">場所・訪問情報・元のSNSや動画の出典を確認。</p></div></article>
+    <article class="card"><div class="card-art">✧</div><div class="card-body"><h3>コースを作る</h3><p class="muted">行きたい場所を保存して、巡礼の予定をまとめよう。</p></div></article>
+  </div>
+  <div class="note">デモ版：掲載スポットは画面操作を試すためのサンプルです。実在の訪問先・営業状況・アーティスト訪問情報として確認されたものではありません。</div>
+  <div class="section-head"><div><h2>対応アーティスト</h2><p>初期サービス対象グループ</p></div></div>
+  <div class="cards">
+    <article class="card"><div class="card-art">TWICE ♡</div><div class="card-body"><h3>TWICE</h3><p class="muted">メンバーに関連するソウルの聖地を探す</p><button class="small-btn" onclick="chooseGroup('TWICE')">TWICEを選ぶ</button></div></article>
+    <article class="card"><div class="card-art">★ SKZ</div><div class="card-body"><h3>Stray Kids</h3><p class="muted">メンバーに関連するソウルの聖地を探す</p><button class="small-btn" onclick="chooseGroup('Stray Kids')">Stray Kidsを選ぶ</button></div></article>
+    <article class="card"><div class="card-art">＋</div><div class="card-body"><h3>その他のグループ</h3><p class="muted">今後のアップデートで追加予定</p></div></article>
+  </div>
+</section>
+
+<section id="select" class="page">
+  <div class="section-head"><div><h2>推しを選ぼう</h2><p>好きなグループ・メンバーを選択してください。</p></div></div>
+  <div class="panel"><h3>01　グループを選択</h3><div class="group-row"><button class="choice selected" id="twiceBtn" onclick="chooseGroup('TWICE')">TWICE</button><button class="choice" id="skzBtn" onclick="chooseGroup('Stray Kids')">Stray Kids</button></div><h3>02　メンバーを選択</h3><div id="members" class="member-row"></div><p class="muted" id="selectedText">グループを選択してください。</p><button class="primary" onclick="showPage('spots')">この推しの聖地を見る →</button></div>
+</section>
+
+<section id="spots" class="page">
+  <div class="section-head"><div><h2>聖地を探す</h2><p>推しに関連する場所を見つけて、お気に入りに保存。</p></div></div>
+  <div class="toolbar"><input id="search" placeholder="場所・キーワードで検索" oninput="renderSpots()"><select id="groupFilter" onchange="renderSpots()"><option value="all">すべてのグループ</option><option>TWICE</option><option>Stray Kids</option></select><select id="statusFilter" onchange="renderSpots()"><option value="all">営業状況：すべて</option><option value="open">営業中（サンプル）</option><option value="closed">休業・要確認（サンプル）</option></select></div>
+  <div class="map-mock">⌖<br><strong>聖地マップ表示エリア</strong><br><small>地図API接続前のデモ表示です。下の一覧からスポットを確認できます。</small></div>
+  <div class="section-head"><div><h2>聖地一覧</h2><p id="spotCount"></p></div></div><div id="spotList" class="spot-list"></div>
+</section>
+
+<section id="favorites" class="page">
+  <div class="section-head"><div><h2>お気に入り</h2><p>行きたい聖地をここにまとめておこう。</p></div><button class="secondary" onclick="showPage('spots')">聖地を探す</button></div>
+  <div id="favoriteList" class="spot-list"></div>
+  <div class="panel"><button class="primary" onclick="showPage('course')">保存した場所でコースを作る →</button></div>
+</section>
+
+<section id="course" class="page">
+  <div class="section-head"><div><h2>今日のコース</h2><p>お気に入りに保存した聖地から、今日行きたい場所を選ぼう。</p></div></div>
+  <div class="note">このデモでは、営業情報が「要確認」のスポットも候補に表示します。実際の旅行では、訪問前に店舗の公式情報を確認してください。</div>
+  <div id="courseList"></div>
+  <div class="panel"><h3>今日の巡礼プラン</h3><div id="route"></div><button class="primary" onclick="makeRoute()">選択した場所でコースを作成</button> <button class="secondary" onclick="openMaps()">地図でルートを見る ↗</button></div>
+</section>
+</main>
+<footer>推し道（오시미치）｜日本人K-POPファンのための聖地巡礼サポート</footer>
+</div>
+<script>
+const members={
+ "TWICE":["全員","ナヨン","ジョンヨン","モモ","サナ","ジヒョ","ミナ","ダヒョン","チェヨン","ツウィ"],
+ "Stray Kids":["全員","バンチャン","リノ","チャンビン","ヒョンジン","ハン","フィリックス","スンミン","アイエン"]
+};
+// Prototype entries only. Replace with researched, source-verified destinations before publication.
+const spots=[
+{id:1,group:"TWICE",name:"サンプルカフェ A",area:"聖水エリア（サンプル）",member:"ナヨン",status:"open",source:"出典URLを登録してください",desc:"訪問情報・店舗情報を確認してから掲載するサンプルスポット。",emoji:"☕"},
+{id:2,group:"TWICE",name:"サンプルショップ B",area:"弘大エリア（サンプル）",member:"モモ",status:"closed",source:"出典URLを登録してください",desc:"営業状況の確認が必要なサンプルスポット。",emoji:"♡"},
+{id:3,group:"TWICE",name:"サンプル撮影地 C",area:"漢江周辺（サンプル）",member:"全員",status:"open",source:"出典URLを登録してください",desc:"撮影場所の位置・訪問情報を確認してから掲載するサンプル。",emoji:"🎬"},
+{id:4,group:"Stray Kids",name:"サンプルカフェ D",area:"江南エリア（サンプル）",member:"ヒョンジン",status:"open",source:"出典URLを登録してください",desc:"訪問情報・店舗情報を確認してから掲載するサンプルスポット。",emoji:"☕"},
+{id:5,group:"Stray Kids",name:"サンプル撮影地 E",area:"麻浦エリア（サンプル）",member:"全員",status:"closed",source:"出典URLを登録してください",desc:"場所や営業状況の確認が必要なサンプルスポット。",emoji:"🎥"},
+{id:6,group:"Stray Kids",name:"サンプルショップ F",area:"龍山エリア（サンプル）",member:"フィリックス",status:"open",source:"出典URLを登録してください",desc:"訪問情報・店舗情報を確認してから掲載するサンプルスポット。",emoji:"✦"}
+];
+let group="TWICE",member="全員",selectedCourse=[];
+let favorites=JSON.parse(localStorage.getItem("oshimichi_favorites")||"[]");
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));if(id==="spots")renderSpots();if(id==="favorites")renderFavorites();if(id==="course")renderCourse();window.scrollTo({top:0,behavior:"smooth"});}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+function chooseGroup(g){group=g;member="全員";document.getElementById("twiceBtn").classList.toggle("selected",g==="TWICE");document.getElementById("skzBtn").classList.toggle("selected",g==="Stray Kids");document.getElementById("members").innerHTML=members[g].map(m=>`<button class="member ${m===member?'selected':''}" onclick="chooseMember('${m}')">${m}</button>`).join("");document.getElementById("selectedText").textContent=`選択中：${g} ／ ${member}`;document.getElementById("groupFilter").value=g;}
+function chooseMember(m){member=m;document.querySelectorAll(".member").forEach(b=>b.classList.toggle("selected",b.textContent===m));document.getElementById("selectedText").textContent=`選択中：${group} ／ ${member}`;}
+function saveFav(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];localStorage.setItem("oshimichi_favorites",JSON.stringify(favorites));updateCount();renderSpots();renderFavorites();}
+function updateCount(){document.getElementById("favCount").textContent=favorites.length;}
+function cardHTML(s){let saved=favorites.includes(s.id);return `<article class="spot-card"><div class="card-art">${s.emoji}</div><div class="spot-info"><span class="tag">${s.group}</span><span class="tag">${s.member}</span><h3>${s.name}</h3><div class="muted">⌖ ${s.area}</div><div class="${s.status==='open'?'status':'status closed'}">${s.status==='open'?'● 営業情報：サンプル・営業中':'● 営業情報：要確認'}</div><p class="muted">${s.desc}</p><div class="muted">出典：${s.source}</div><div class="actions"><button class="small-btn ${saved?'saved':''}" onclick="saveFav(${s.id})">${saved?'♥ 保存済み':'♡ お気に入り'}</button></div></div></article>`}
+function renderSpots(){let q=document.getElementById("search").value.toLowerCase(),g=document.getElementById("groupFilter").value,st=document.getElementById("statusFilter").value;let arr=spots.filter(s=>(g==="all"||s.group===g)&&(st==="all"||s.status===st)&&(`${s.name}${s.area}${s.member}${s.group}`).toLowerCase().includes(q));document.getElementById("spotList").innerHTML=arr.length?arr.map(cardHTML).join(""):'<div class="empty">該当する聖地がありません。</div>';document.getElementById("spotCount").textContent=`${arr.length}件のスポット（デモデータ）`;}
+function renderFavorites(){let arr=spots.filter(s=>favorites.includes(s.id));document.getElementById("favoriteList").innerHTML=arr.length?arr.map(cardHTML).join(""):'<div class="empty">まだお気に入りはありません。<br>気になる聖地を保存してみよう ♡</div>';}
+function renderCourse(){let arr=spots.filter(s=>favorites.includes(s.id));document.getElementById("courseList").innerHTML=arr.length?`<div class="panel"><h3>コースに入れる場所を選択</h3>${arr.map(s=>`<label class="route-item"><input type="checkbox" value="${s.id}" ${selectedCourse.includes(s.id)?'checked':''} onchange="toggleCourse(${s.id},this.checked)"><span><strong>${s.name}</strong><div class="muted">${s.area} · ${s.status==='open'?'サンプル営業中':'営業状況要確認'}</div></span></label>`).join("")}</div>`:'<div class="empty">お気に入りがまだありません。<br>まずは聖地を保存しよう。</div>';document.getElementById("route").innerHTML='<p class="muted">コースはまだ作成されていません。</p>';}
+function toggleCourse(id,on){selectedCourse=on?[...new Set([...selectedCourse,id])]:selectedCourse.filter(x=>x!==id);}
+function makeRoute(){let arr=spots.filter(s=>selectedCourse.includes(s.id));document.getElementById("route").innerHTML=arr.length?arr.map((s,i)=>`<div class="route-item"><span class="number">${i+1}</span><div><strong>${s.name}</strong><div class="muted">${s.area} · ${s.status==='open'?'営業情報サンプル：営業中':'営業情報要確認'}</div></div></div>`).join(""):'<p class="muted">コースに入れる場所を選択してください。</p>';}
+function openMaps(){let arr=spots.filter(s=>selectedCourse.includes(s.id));if(!arr.length){alert("先にコースに入れる場所を選択してください。");return;}let query=encodeURIComponent(arr.map(s=>s.name+" "+s.area).join(" "));window.open("https://www.google.com/maps/search/?api=1&query="+query,"_blank");}
+chooseGroup("TWICE");updateCount();renderSpots();
+</script>
+</body>
+</html>
